@@ -1,0 +1,76 @@
+<mvc:View
+    xmlns:layout="sap.ui.layout"
+    controllerName="project7.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:sm="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table"
+>
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Title text="Form Data" />
+            <VBox>
+                <Label text="Name" />
+                <Input value="{/formD/name}" />
+                <Label text="Age" />
+                <Input value="{/formD/age}" />
+                <Label text="Gender" />
+                <RadioButtonGroup selectedIndex="{/formD/gender}">
+                    <RadioButton text="Male" />
+                    <RadioButton text="Female" />
+                </RadioButtonGroup>
+                <CheckBox
+                    selected="{/formD/Attendance}"
+                    text="Today's attendance"
+                />
+                <CheckBox
+                    id="check"
+                    text="Do you have any doubts?"
+                    visible="{= ${/formD/Attendance} }"
+                    select="onAttendanceSelect"
+                />
+                <Input
+                    placeholder="What is your doubt?"
+                    id="douteqn"
+                    visible="false"
+                />
+            </VBox>
+
+            <Title text="Smart Table" />
+            <sm:SmartTable 
+                id="mySmartTable" 
+                entitySet="empModel" 
+                tableType="Table"
+                showRowCount="true"
+                header="Employee Data"
+                enableAutoBinding="true"
+                smartFilterId="smartFilterBar"
+                initiallyVisibleFields="id,name,salary"
+                persistencyKey="SmartTable"
+                visible="true">
+                
+                <Table items="{empModel>/Emp}">
+                    <columns>
+                        <Column>
+                            <Text text="ID" />
+                        </Column>
+                        <Column>
+                            <Text text="Name" />
+                        </Column>
+                        <Column>
+                            <Text text="Salary" />
+                        </Column>
+                    </columns>
+                    <items>
+                    <ColumnListItem >
+                    <Text text="{empModel>id}"/>
+                    <Text text="{empModel>name}"/>
+                    <Text text="{empModel>salary}"/>
+                    </ColumnListItem>
+                    </items>
+                </Table>
+            </sm:SmartTable>
+        </content>
+    </Page>
+</mvc:View>
